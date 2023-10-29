@@ -1,0 +1,17 @@
+{
+    "name": "eco13/tz",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ilya Shirokov",
+            "email": "asd.mat@mail.ru"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}
