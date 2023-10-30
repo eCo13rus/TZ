@@ -12,8 +12,8 @@ $twig = new Environment($loader);
 $message = null;
 
 if (php_sapi_name() == "cli") {
-    echo "Processing via CLI\n";
-    $filePath = 'russian.txt';
+    echo "Файл успешно обработан\n";
+    $filePath = 'test.txt';
     $fileProcessor = new FileProcessor($filePath);
     $fileProcessor->process();
     return;
@@ -21,13 +21,13 @@ if (php_sapi_name() == "cli") {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_FILES['file'])) {
-        $message = 'Пожалуйста, загрузите файл.';
+        $message = 'Произошла ошибка при загрузке файла.';
         echo $twig->render('upload_form.twig', ['message' => $message]);
         return;
     }
 
     if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
-        $message = 'Произошла ошибка при загрузке файла.';
+        $message = 'Пожалуйста загрузите файл.';
         echo $twig->render('upload_form.twig', ['message' => $message]);
         return;
     }
