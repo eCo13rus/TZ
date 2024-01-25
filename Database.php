@@ -26,17 +26,21 @@ class Database implements DatabaseInterface
     }
 
     private function replaceBracePlaceholders(string $query, array $args): string
-    {
-        $skipValue = $this->skip(); // Получение специального значения для пропуска.
+    {   
+        // Получаем специальное значение для пропуска
+        $skipValue = $this->skip();
 
-        // Замена плейсхолдеров в фигурных скобках.
+        // Используем preg_replace_callback для поиска и замены плейсхолдеров
         return preg_replace_callback('/\{([^{}]*)\}/', function ($match) use ($args, $skipValue) {
+            // Перебираем аргументы, чтобы найти и заменить соответствующие плейсхолдеры
             foreach ($args as $arg) {
+                // Если аргумент равен значению для пропуска, возвращаем пустую строку
                 if ($arg === $skipValue) {
-                    return ''; // Пропуск значения, если оно совпадает со специальным значением пропуска.
+                    return '';
                 }
             }
-            return $match[1]; // Возвращение значения из $args.
+            // Возвращаем значение плейсхолдера
+            return $match[1];
         }, $query);
     }
 
