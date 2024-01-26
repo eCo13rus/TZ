@@ -134,7 +134,7 @@ class Database implements DatabaseInterface
     {
         // Генерация и возврат специального значения для пропуска, если оно ещё не было установлено.
         if (null === $this->skipValue) {
-            $this->skipValue = 'FpDbTest_Database_Skip_Special_Value_' . uniqid();
+            $this->skipValue = '___SKIP___' . uniqid();
         }
         return $this->skipValue;
     }
